@@ -37,37 +37,37 @@
         <script type = "text/javascript">
             function WebSocketTest() {
 
-                // if ("WebSocket" in window) {
-                //     // alert("WebSocket is supported by your Browser!");
+                if ("WebSocket" in window) {
+                    // alert("WebSocket is supported by your Browser!");
 
-                //     // Let us open a web socket
-                //     var ws = new WebSocket("ws://10.7.0.90:6070/echo");
+                    // Let us open a web socket
+                    var ws = new WebSocket("ws://10.7.0.90:6070/echo");
 
-                //     ws.onopen = function () {
+                    ws.onopen = function () {
 
-                //         // Web Socket is connected, send data using send()
-                //         /*ws.send("Message to send");*/
-                //         /*alert("Message is sent...");*/
-                //         ws.send("ABCDE");
-                //     };
+                        // Web Socket is connected, send data using send()
+                        /*ws.send("Message to send");*/
+                        /*alert("Message is sent...");*/
+                        ws.send("ABCDE");
+                    };
 
-                //     ws.onmessage = function (evt) {
-                //         var received_msg = JSON.parse(evt.data);
-                //         // alert("Message is received... " + received_msg);
-                //         // console.log(received_msg.prog);
-                //         setTimeout(function () {
-                //             odometer.innerHTML = received_msg.prog;
-                //         }, 1000);
-                //     };
+                    ws.onmessage = function (evt) {
+                        var received_msg = JSON.parse(evt.data);
+                        // alert("Message is received... " + received_msg);
+                        // console.log(received_msg.prog);
+                        setTimeout(function () {
+                            odometer.innerHTML = received_msg.prog;
+                        }, 1000);
+                    };
 
-                //     ws.onclose = function () {
-                //         // websocket is closed.
-                //         alert("Connection is closed...");
-                //     };
-                // } else {
-                //     // The browser doesn't support WebSocket
-                //     alert("WebSocket NOT supported by your Browser!");
-                // }
+                    ws.onclose = function () {
+                        // websocket is closed.
+                        alert("Connection is closed...");
+                    };
+                } else {
+                    // The browser doesn't support WebSocket
+                    alert("WebSocket NOT supported by your Browser!");
+                }
             }
             window.onload = function(){
                 window.odometerOptions = { auto: false }; // Disables auto-initialization
@@ -76,7 +76,7 @@
                 var odometer = new Odometer({ el: document.getElementById("odometerGrand"), value: 123, theme: 'grand' });
                 odometer.render();
 
-                    odometerGrand.innerHTML = 1;
+                    // odometerGrand.innerHTML = 1;
 
                 var odometerMajor = new Odometer({ el: document.getElementById("odometerMajor"), value: 123, theme: 'major' });
                 odometerMajor.render();
