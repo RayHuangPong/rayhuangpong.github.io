@@ -43,10 +43,9 @@
 .odometer.odometer-auto-theme .odometer-digit .odometer-value, .odometer.odometer-theme-grand .odometer-digit .odometer-value {
   display: block;
   -webkit-transform: translateZ(0);
-  font-weight: 1000;
-  background: -webkit-linear-gradient(-86deg, #EEF85B 5%, #7AEC8D 53%, #09E5C3 91%);
+  background: -webkit-linear-gradient(-90deg, #fffee9 5%, #f3cf00 53%, #ffff4f 91%);
   -webkit-background-clip: text;
-  -webkit-text-stroke: 4px transparent;
+  -webkit-text-stroke: 8px transparent;
 }
 .odometer.odometer-auto-theme .odometer-digit .odometer-value.odometer-last-value, .odometer.odometer-theme-grand .odometer-digit .odometer-value.odometer-last-value {
   position: absolute;
@@ -88,6 +87,9 @@
 .odometer.odometer-auto-theme, .odometer.odometer-theme-grand {
   font-family: "Impact";
   color: #f80000;
+  background: -webkit-linear-gradient(-90deg, #fffee9 5%, #f3cf00 53%, #ffff4f 91%);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: -2px transparent;
 }
 .odometer.odometer-auto-theme .odometer-digit + .odometer-digit, .odometer.odometer-theme-grand .odometer-digit + .odometer-digit {
   margin-left: 0.15em;

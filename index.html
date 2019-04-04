@@ -2,10 +2,10 @@
 <html>
     <head>
         <!-- Odometr includes -->
-        <link rel="stylesheet" href="css\odometer-theme-slot-machine.css" />
-        <link rel="stylesheet" href="css\odometer-theme-grand.css" />
+        <!-- <link rel="stylesheet" href="css\odometer-theme-slot-machine.css" /> -->
+        <!-- <link rel="stylesheet" href="css\odometer-theme-grand.css" /> -->
         <link rel="stylesheet" href="css\odometer-theme-major.css" />
-        <script src="https://github.hubspot.com/odometer/odometer.js"></script>
+        <script src="js/odometer.js"></script>
         <!-- Extra styles for this example -->
         <style>
             .odometer {
@@ -35,13 +35,15 @@
             }
         </style>
         <script type = "text/javascript">
+            var valueGrand = 0, valueMajor = 0, valueMinor = 0, valueMini = 0;
+
             function WebSocketTest() {
 
                 if ("WebSocket" in window) {
                     // alert("WebSocket is supported by your Browser!");
 
                     // Let us open a web socket
-                    var ws = new WebSocket("ws://10.7.0.90:6070/echo");
+                    var ws = new WebSocket("ws://10.7.0.90:8070");
 
                     ws.onopen = function () {
 
@@ -55,9 +57,16 @@
                         var received_msg = JSON.parse(evt.data);
                         // alert("Message is received... " + received_msg);
                         // console.log(received_msg.prog);
-                        setTimeout(function () {
-                            odometer.innerHTML = received_msg.prog;
-                        }, 1000);
+
+                            valueGrand = received_msg.grand;
+                            valueMajor = received_msg.major;
+                            valueMinor = received_msg.minor;
+                            valueMini = received_msg.mini;
+
+                            increamentalGrand();
+                            increamentalMajor();
+                            increamentalMinor();
+                            increamentalMini();
                     };
 
                     ws.onclose = function () {
@@ -70,32 +79,36 @@
                 }
             }
             window.onload = function(){
-                window.odometerOptions = { auto: false }; // Disables auto-initialization
-
-                // For each odometer, initialize with the theme passed in:
-                var odometer = new Odometer({ el: document.getElementById("odometerGrand"), value: 123, theme: 'grand' });
-                odometer.render();
-
-                    // odometerGrand.innerHTML = 1;
-
-                var odometerMajor = new Odometer({ el: document.getElementById("odometerMajor"), value: 123, theme: 'major' });
-                odometerMajor.render();
-                odometerMajor.update(0);
-
-                // setTimeout(function(){
-                //     odometerGrand.innerHTML = "999999.99";
-                //     odometerMajor.innerHTML = 99999.99;
-                //     odometerMinor.innerHTML = 9999.99;
-                //     odometerMini.innerHTML = 999.99;
-                // }, 2000);
+                WebSocketTest();
             }
-            // window.odometerOptions = {
-            //   selector: '.odometer', // Change the selector used to automatically find things to be animated
-            //   format: '(,ddd).dd', // Change how digit groups are formatted, and how many digits are shown after the decimal point
-            //   duration: 60000, // Change how long the javascript expects the CSS animation to take
-            //   animation: 'count' // Count is a simpler animation method which just increments the value,
-            //                      // use it when you're looking for something more subtle.
-            // };
+            increamentalGrand = function() {
+                valueGrand += 10000.00 * Math.random();
+                odometerGrand.innerHTML = valueGrand;
+                setTimeout(function(){
+                    increamentalGrand();
+                }, Math.random() * 1000 + 1000);
+            }
+            increamentalMajor = function() {
+                valueMajor += 1000.00 * Math.random();
+                odometerMajor.innerHTML = valueMajor;
+                setTimeout(function(){
+                    increamentalMajor();
+                }, Math.random() * 1000 + 1000);
+            }
+            increamentalMinor = function() {
+                valueMinor += 100.00 * Math.random();
+                odometerMinor.innerHTML = valueMinor;
+                setTimeout(function(){
+                    increamentalMinor();
+                }, Math.random() * 1000 + 1000);
+            }
+            increamentalMini = function() {
+                valueMini += 10.00 * Math.random();
+                odometerMini.innerHTML = valueMini;
+                setTimeout(function(){
+                    increamentalMini();
+                }, Math.random() * 1000 + 1000);
+            }
         </script>
     </head>
     <body background="img/bg.jpg">
