@@ -43,7 +43,7 @@
                     // alert("WebSocket is supported by your Browser!");
 
                     // Let us open a web socket
-                    var ws = new WebSocket("ws://10.7.0.90:8070");
+                    var ws = new WebSocket("ws://pongdev2.blazesoft.ca:8070");
 
                     ws.onopen = function () {
 
@@ -56,7 +56,7 @@
                     ws.onmessage = function (evt) {
                         var received_msg = JSON.parse(evt.data);
                         // alert("Message is received... " + received_msg);
-                        // console.log(received_msg.prog);
+                        console.log(received_msg);
 
                             valueGrand = received_msg.grand;
                             valueMajor = received_msg.major;
